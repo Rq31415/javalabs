@@ -43,10 +43,18 @@ class CourseToolkitTest {
     }
 
     @Test
-    void returnsTrueForTwoAndPrimeSquares() {
+    void returnsTrueForTwo() {
         assertTrue(CourseToolkit.isPrime(2));
         assertTrue(CourseToolkit.isPrime(3));
     }
+
+    @Test
+    void returnsFalseForPrimeSquares() {
+        assertFalse(CourseToolkit.isPrime(4));
+        assertFalse(CourseToolkit.isPrime(25));
+        assertFalse(CourseToolkit.isPrime(49));
+    }
+
 
     @Test
     void returnsTrueForPalindromeString() {
@@ -82,6 +90,36 @@ class CourseToolkitTest {
         org.junit.jupiter.api.Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> CourseToolkit.average(new int[]{})
+        );
+    }
+    @Test
+    void isPalindromeIsCaseAndSpaceSensitive() {
+        assertFalse(CourseToolkit.isPalindrome("Level"));
+        assertFalse(CourseToolkit.isPalindrome("nurses run"));
+    }
+
+    @Test
+    void returnsCorrectAverageForNegativeNumbers() {
+        int[] numbers = {-2, -4, -6};
+        org.junit.jupiter.api.Assertions.assertEquals(-4.0, CourseToolkit.average(numbers), 0.0001);
+    }
+
+    @Test
+    void returnsMinAndMaxForArray() {
+        int[] numbers = {3, -5, 10, 0};
+        org.junit.jupiter.api.Assertions.assertEquals(-5, CourseToolkit.min(numbers));
+        org.junit.jupiter.api.Assertions.assertEquals(10, CourseToolkit.max(numbers));
+    }
+
+    @Test
+    void throwsExceptionForNullOrEmptyMinMax() {
+        org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> CourseToolkit.min(null)
+        );
+        org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> CourseToolkit.max(new int[]{})
         );
     }
 }
